@@ -1,0 +1,34 @@
+{
+  "name": "@mvalimento/react-checkbox-list",
+  "version": "0.0.1",
+  "description": "A Material UI based react component for checkbox list.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mvalimento/react-checkbox-list"
+  },
+  "keywords": [
+    "checkbox",
+    "checkboxlist",
+    "checkboxgroup",
+    "react",
+    "component",
+    "material-ui",
+    "configurable",
+    "final-form"
+  ],
+  "dependencies": {
+    "@material-ui/core": "^4.4.3",
+    "@material-ui/icons": "^4.4.3",
+    "lodash": "^4.17.15",
+    "react": "^16.10.0",
+    "react-checkboxlist-select": "^1.0.3",
+    "react-dom": "^16.10.0",
+    "react-scripts": "3.1.2"
+  },
+  "author": "mvalimento",
+  "license": "MIT"
+}
