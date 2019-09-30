@@ -1,5 +1,5 @@
 {
-  "name": "@mvalimento/react-checkbox-list",
+  "name": "mui-checkboxlist",
   "version": "0.0.1",
   "description": "A Material UI based react component for checkbox list.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mvalimento/react-checkbox-list"
+    "url": "https://github.com/mvalimento/mui-checkboxlist.git"
   },
   "keywords": [
     "checkbox",
@@ -25,10 +25,10 @@
     "@material-ui/icons": "^4.4.3",
     "lodash": "^4.17.15",
     "react": "^16.10.0",
-    "react-checkboxlist-select": "^1.0.3",
     "react-dom": "^16.10.0",
     "react-scripts": "3.1.2"
   },
   "author": "mvalimento",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://github.com/mvalimento/mui-checkboxlist"
 }
