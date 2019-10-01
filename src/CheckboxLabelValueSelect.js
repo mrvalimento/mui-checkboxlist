@@ -107,7 +107,7 @@ class CheckboxLabelValueSelect extends React.Component {
 
   renderSearchBar(searchBarLabel) {
     const handleSearchChange = event => {
-      this.setState({ searchKey: event.target.value });
+      this.setState({ searchKey: _.lowerCase(event.target.value) });
     };
 
     return (
@@ -143,11 +143,13 @@ class CheckboxLabelValueSelect extends React.Component {
   renderSelectAll() {
     const { classes, selectedItems, listItems, selectAllLabel } = this.state;
     const handleSelectAllChange = event => {
+      const {onChange} = this.state;
       if (event.target.checked) {
         this.setState({ selectedItems: _.clone(this.state.listItems) });
       } else {
         this.setState({ selectedItems: [] });
       }
+      onChange(this.state.selectedItems);
     };
 
     return (
@@ -253,7 +255,7 @@ class CheckboxLabelValueSelect extends React.Component {
     const filteredListItems = _.orderBy(
       searchKey && searchKey !== ""
         ? _.filter(listItems, listItem => {
-            return _.startsWith(listItem.label, searchKey);
+            return _.startsWith(_.lowerCase(listItem.label), searchKey);
           })
         : selectedItemsFirst && !_.isEmpty(selectedItems)
         ? _.filter(listItems, listItem => {

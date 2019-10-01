@@ -107,7 +107,7 @@ class CheckboxValueSelect extends React.Component {
 
   renderSearchBar(searchBarLabel) {
     const handleSearchChange = event => {
-      this.setState({ searchKey: event.target.value });
+      this.setState({ searchKey: _.lowerCase(event.target.value) });
     };
 
     return (
@@ -116,7 +116,8 @@ class CheckboxValueSelect extends React.Component {
         placeholder={searchBarLabel}
         style={this.state.classes.listSearchBarText}
         value={this.state.searchKey ? this.state.searchKey : ""}
-        onChange={handleSearchChange}
+        onChange={handleSearchChange}        
+        disabled={this.state.disabled}
         InputProps={
           !_.isNil(this.state.searchKey) && this.state.searchKey !== ""
             ? {
@@ -143,11 +144,13 @@ class CheckboxValueSelect extends React.Component {
   renderSelectAll() {
     const { classes, selectedItems, listItems, selectAllLabel } = this.state;
     const handleSelectAllChange = event => {
+      const {onChange} = this.state;
       if (event.target.checked) {
         this.setState({ selectedItems: _.clone(this.state.listItems) });
       } else {
         this.setState({ selectedItems: [] });
       }
+      onChange(this.state.selectedItems);
     };
 
     return (
@@ -160,6 +163,7 @@ class CheckboxValueSelect extends React.Component {
               color="default"
               checked={_.isEqual(selectedItems, listItems)}
               onChange={handleSelectAllChange}
+              disabled={this.state.disabled}
               checkedIcon={
                 <span
                   style={Object.assign(
@@ -252,7 +256,7 @@ class CheckboxValueSelect extends React.Component {
     const filteredListItems = _.orderBy(
       searchKey && searchKey !== ""
         ? _.filter(listItems, listItem => {
-            return _.startsWith(listItem, searchKey);
+            return _.startsWith(_.lowerCase(listItem), searchKey);
           })
         : selectedItemsFirst && !_.isEmpty(selectedItems)
         ? _.filter(listItems, listItem => {
@@ -318,7 +322,7 @@ class CheckboxValueSelect extends React.Component {
 
 CheckboxValueSelect.propTypes = {
   /**
-   * Optional. If set to true, checkboxes are disabled.
+   * Optional. If set to true, checkboxes and textfields are disabled.
    */
   disabled: PropTypes.bool,
   /**
