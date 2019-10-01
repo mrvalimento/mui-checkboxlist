@@ -1,6 +1,6 @@
 {
   "name": "mui-checkboxlist",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A Material UI based react component for checkbox list.",
   "main": "dist/index.js",
   "scripts": {

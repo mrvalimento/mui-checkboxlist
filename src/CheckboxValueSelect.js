@@ -8,71 +8,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
-
-const defaultStyle = {
-  root: {
-    border: "1px solid lightgray",
-    padding: "10px",
-    borderRadius: "10px"
-  },
-  listLabel: {
-    color: "#137cbd",
-    fontWeight: "700",
-    paddingBottom: "10px"
-  },
-  listSearchBarText: {
-    root: {
-      background: "black"
-    },
-    input: {
-      color: "white"
-    }
-  },
-  listContainer: {
-    backgroundColor: "#eeeeee",
-    padding: "10px",
-    borderRadius: "0px 0px 5px 5px",
-    height: "100px",
-    overflow: "auto"
-  },
-  listItemCheckbox: {
-    root: {
-      "&:hover": {
-        backgroundColor: "transparent"
-      }
-    },
-    icon: {
-      borderRadius: 3,
-      width: 16,
-      height: 16,
-      boxShadow:
-        "inset 0 0 0 1px rgba(16,22,26,.2), inset 0 -1px 0 rgba(16,22,26,.1)",
-      backgroundColor: "#f5f8fa",
-      backgroundImage:
-        "linear-gradient(180deg,hsla(0,0%,100%,.8),hsla(0,0%,100%,0))",
-      "input:hover ~ &": {
-        backgroundColor: "#ebf1f5"
-      },
-      "input:disabled ~ &": {
-        boxShadow: "none",
-        background: "rgba(206,217,224,.5)"
-      }
-    },
-    checkedIcon: {
-      backgroundColor: "#137cbd",
-      backgroundImage:
-        "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath" +
-        " fill-rule='evenodd' clip-rule='evenodd' d='M12 5c-.28 0-.53.11-.71.29L7 9.59l-2.29-2.3a1.003 " +
-        "1.003 0 00-1.42 1.42l3 3c.18.18.43.29.71.29s.53-.11.71-.29l5-5A1.003 1.003 0 0012 5z' fill='%23fff'/%3E%3C/svg%3E\")",
-      "input:hover ~ &": {
-        backgroundColor: "#106ba3"
-      }
-    },
-    label: {
-      textTransform: "capitalize"
-    }
-  }
-};
+import defaultStyle from './DefaultStyles';
 
 class CheckboxValueSelect extends React.Component {
   constructor(props) {
@@ -89,7 +25,9 @@ class CheckboxValueSelect extends React.Component {
       selectAllLabel: this.props.selectAllLabel,
       statusBar: this.props.statusBar,
       onChange: this.props.onChange,
-      selectedItemsFirst: this.props.selectedItemsFirst
+      selectedItemsFirst: this.props.selectedItemsFirst,
+      checkedIcon: this.props.checkedIcon,
+      icon: this.props.icon
     };
   }
 
@@ -164,18 +102,11 @@ class CheckboxValueSelect extends React.Component {
               checked={_.isEqual(selectedItems, listItems)}
               onChange={handleSelectAllChange}
               disabled={this.state.disabled}
-              checkedIcon={
-                <span
-                  style={Object.assign(
-                    {},
-                    classes.listItemCheckbox.icon,
-                    classes.listItemCheckbox.checkedIcon
-                  )}
-                />
-              }
-              icon={<span style={classes.listItemCheckbox.icon} />}
+              checkedIcon={this.state.checkedIcon}
+              icon={this.state.icon}
             />
           }
+          style={classes.listItemCheckbox.label}
           label={selectAllLabel}
         />
       </div>
@@ -184,8 +115,8 @@ class CheckboxValueSelect extends React.Component {
 
   renderStatusBar() {
     const { selectedItems, limit } = this.state;
-    let status = `${selectedItems.length} items ${
-      selectedItems.length > 1 ? "are" : "is"
+    let status = `${selectedItems.length} item${
+      selectedItems.length !== 1 ? "s are" : " is"
     } currently selected.`;
     if (limit) {
       status =
@@ -226,16 +157,8 @@ class CheckboxValueSelect extends React.Component {
               color="default"
               checked={this.isChecked(item, selectedItems)}
               onChange={handleChange(item)}
-              checkedIcon={
-                <span
-                  style={Object.assign(
-                    {},
-                    classes.listItemCheckbox.icon,
-                    classes.listItemCheckbox.checkedIcon
-                  )}
-                />
-              }
-              icon={<span style={classes.listItemCheckbox.icon} />}
+              checkedIcon={this.state.checkedIcon}
+              icon={this.state.icon}
             />
           }
           style={classes.listItemCheckbox.label}
