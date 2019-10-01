@@ -145,12 +145,12 @@ class CheckboxValueSelect extends React.Component {
     const { classes, selectedItems, listItems, selectAllLabel } = this.state;
     const handleSelectAllChange = event => {
       const {onChange} = this.state;
+      let newSelectedItems = [];
       if (event.target.checked) {
-        this.setState({ selectedItems: _.clone(this.state.listItems) });
-      } else {
-        this.setState({ selectedItems: [] });
-      }
-      onChange(this.state.selectedItems);
+        newSelectedItems = _.clone(this.state.listItems);
+      }      
+      onChange(newSelectedItems);
+      this.setState({ selectedItems: newSelectedItems });
     };
 
     return (
