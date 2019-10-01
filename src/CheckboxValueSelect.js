@@ -54,8 +54,7 @@ class CheckboxValueSelect extends React.Component {
         placeholder={searchBarLabel}
         style={this.state.classes.listSearchBarText}
         value={this.state.searchKey ? this.state.searchKey : ""}
-        onChange={handleSearchChange}        
-        disabled={this.state.disabled}
+        onChange={handleSearchChange}     
         InputProps={
           !_.isNil(this.state.searchKey) && this.state.searchKey !== ""
             ? {
@@ -143,8 +142,8 @@ class CheckboxValueSelect extends React.Component {
           return item === listItem;
         });
       }
-      this.setState({ selectedItems: newSelectedItems });
       onChange(newSelectedItems);
+      this.setState({ selectedItems: newSelectedItems });
     };
 
     return (
@@ -153,6 +152,7 @@ class CheckboxValueSelect extends React.Component {
           control={
             <Checkbox
               style={classes.listItemCheckbox}
+              disabled={this.state.disabled}
               disableRipple
               color="default"
               checked={this.isChecked(item, selectedItems)}
@@ -229,7 +229,7 @@ class CheckboxValueSelect extends React.Component {
             {this.renderStatusBar()}
           </Grid>
         )}
-        {searchBarLabel && (
+        {searchBarLabel && (!this.state.disabled) && (
           <Grid item xs={12} style={classes.listSearchBar}>
             {this.renderSearchBar(searchBarLabel)}
           </Grid>
@@ -245,9 +245,17 @@ class CheckboxValueSelect extends React.Component {
 
 CheckboxValueSelect.propTypes = {
   /**
+   * Optional. Icon to show when the checkbox controls are checked.
+   */
+  checkedIcon: PropTypes.object,
+  /**
    * Optional. If set to true, checkboxes and textfields are disabled.
    */
   disabled: PropTypes.bool,
+  /**
+   * Optional. Icon to show when the checkbox controls are not checked.
+   */
+  icon: PropTypes.object,
   /**
    * Optional. Displays a label to describe the whole list.
    */

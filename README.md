@@ -40,9 +40,11 @@ const listItems_valueOnly = [ "white", ... ];
 
 | Props | Mandatory | Default | Description |
 | ------ | ------ | ------ | ------ | 
+| checkedIcon | no | | Icon to show when the checkbox controls are checked. |
 | disabled | no | false | If set to true, checkboxes and textfields are disabled. |
 | label | no | | Displays a label to describe the whole list.
 | limit | no | | If present, it should container a number called 'max' which limits the selected items to the specified number and 'deleteLast' which when set to true, will uncheck the last checked item instead of the first. |
+| icon | no | | Icon to show when the checkbox controls are not checked. |
 | listItems | yes | | Contains all the items available for selection. |
 | onChange | yes | | This function will provide the updated selected values. Basic structure is (selectedItems) => {}, where selectedItems is an array. |
 | searchBarLabel | no | | If provided, search bar will be displayed and its value will be the placeholder. |

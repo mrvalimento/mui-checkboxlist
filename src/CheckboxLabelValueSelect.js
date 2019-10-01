@@ -96,6 +96,7 @@ class CheckboxLabelValueSelect extends React.Component {
           control={
             <Checkbox
               style={classes.listItemCheckbox}
+              disabled={this.state.disabled}
               disableRipple
               color="default"
               checked={_.isEqual(selectedItems, listItems)}
@@ -142,8 +143,8 @@ class CheckboxLabelValueSelect extends React.Component {
           return item.label === listItem.label;
         });
       }
-      this.setState({ selectedItems: newSelectedItems });
       onChange(newSelectedItems);
+      this.setState({ selectedItems: newSelectedItems });
     };
 
     return (
@@ -152,6 +153,7 @@ class CheckboxLabelValueSelect extends React.Component {
           control={
             <Checkbox
               style={classes.listItemCheckbox}
+              disabled={this.state.disabled}
               disableRipple
               color="default"
               checked={this.isValueChecked(item, selectedItems)}
@@ -229,7 +231,7 @@ class CheckboxLabelValueSelect extends React.Component {
             {this.renderStatusBar()}
           </Grid>
         )}
-        {searchBarLabel && (
+        {searchBarLabel && (!this.state.disabled) && (
           <Grid item xs={12} style={classes.listSearchBar}>
             {this.renderSearchBar(searchBarLabel)}
           </Grid>
